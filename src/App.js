@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {Home, WatchList, MovieDetails, WelcomeScreen} from './pages';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+	top:0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+
+`
+
+export default function MovieApp() {
+	return (
+		<Router>
+			<Container>
+				<WelcomeScreen />
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route path="/watchlist" component={WatchList} />
+					<Route path="/movie/:id" exact={true} children={<MovieDetails />} />
+				</Switch>
+				
+			</Container>
+		</Router>
+	)
 }
 
-export default App;
